@@ -8,7 +8,9 @@ export default function CommentsSection({
   shelfId
 }:{shelfId: string}) {
     const [comments,setComments] = useState([])
-    const handleComments
+    const handleComments = ()=>{
+      
+    }
     useEffect(()=>{
     })
   return (

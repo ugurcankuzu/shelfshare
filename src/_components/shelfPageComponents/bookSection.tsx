@@ -5,9 +5,13 @@ import Book from "../dashboardPageComponents/book";
 import EPreviewMode from "@/_enums/EPreviewMode";
 import { useState } from "react";
 import AddBook from "./addBook";
-
+interface IBookProperties{
+  imgUrl: string;
+  name: string;
+  author: string;
+}
 interface IBooksSection {
-  books: Array<Object>;
+  books: Array<IBookProperties>;
   previewMode: EPreviewMode;
   shelfId: string;
   handleAddedBook: Function;
@@ -23,7 +27,7 @@ export default function BooksSection({ books, previewMode,shelfId,handleAddedBoo
       <div className="w-full h-full flex justify-start items-start flex-wrap gap-2">
         {books &&
           books.map((book) => (
-            <Book imgUrl="" name={book.name} author={book.author} />
+            <Book imgUrl={book.imgUrl} name={book.name} author={book.author} />
           ))}
         {previewMode === EPreviewMode.OWNER_MODE && (
           <button onClick={()=> formVisibilityHandler()} className="border-4 border-latte border-dashed w-[100px] h-[150px] rounded-md px-2">

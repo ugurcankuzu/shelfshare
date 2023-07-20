@@ -32,7 +32,7 @@ export default function ShelveShowCase({
         <div className="flex items-center gap-2 overflow-x-auto snap-mandatory">
           {books.length > 0 &&
             books.map((book: any) => (
-              <Book name={book.name} imgUrl={book.url} author={book.author} />
+              <Book name={book.name} imgUrl={book.imgUrl} author={book.author} />
             ))}
         </div>
       </div>

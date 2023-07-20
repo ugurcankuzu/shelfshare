@@ -1,5 +1,6 @@
 "use client";
 import pathCheck from "@/_lib/pathCheck";
+import urlFormatter from "@/_lib/urlFormatter";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useEffect } from "react";
@@ -15,26 +16,35 @@ export default function Book({ imgUrl, name, author }: IBook) {
 
   return (
     <div
-      className={`w-[100px] flex flex-col items-center p-2 ${
-        routeBasedCondition ? "bg-latte h-[150px]" : "bg-dark-brown h-full"
-      } rounded-md shadow-lg snap-center`}
+      className={`w-[100px] flex flex-col items-center ${
+        routeBasedCondition ? "bg-latte h-[150px]" : "bg-dark-brown h-[200px]"
+      } rounded-md shadow-lg snap-center relative`}
     >
       <Image
-        src={imgUrl}
-        width={routeBasedCondition ? 50 : 100}
-        height={routeBasedCondition ? 75 : 150}
+        src={process.env.baseCDN + urlFormatter(imgUrl)}
         alt={`${name} cover image`}
+        fill={true}
       />
-      <p
-        className={`max-w-[100px] text-center text-ellipsis overflow-hidden  ${
-          routeBasedCondition ? "text-dark-brown text-xs" : "text-latte text-lg"
-        } font-bold`}
-      >
-        {name}
-      </p>
-      <p className={`max-w-[100px] text-center text-ellipsis overflow-hidden ${routeBasedCondition ? "text-dark-brown text-xs": "text-latte text-sm"} font-thin italic`}>
-        {author}
-      </p>
+      <div className="absolute z-[100] bg-black/50 w-full h-full flex flex-col justify-center items-center transition-all duration-[.25s] hover:bg-black/80 p-2">
+        <p
+          className={`max-w-[100px] text-center text-ellipsis overflow-hidden text-white ${
+            routeBasedCondition
+              ? "text-xs"
+              : "text-lg"
+          } font-bold`}
+        >
+          {name}
+        </p>
+        <p
+          className={`max-w-[100px] text-center text-ellipsis overflow-hidden text-white ${
+            routeBasedCondition
+              ? "text-xs"
+              : "text-sm"
+          } font-thin italic`}
+        >
+          {author}
+        </p>
+      </div>
     </div>
   );
 }
